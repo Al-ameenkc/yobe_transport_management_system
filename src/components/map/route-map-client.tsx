@@ -54,8 +54,14 @@ export function RouteMapClient({
   const scope = inferTripScope(origin, destination);
   const from = getLocationCoordinates(origin);
   const to = getLocationCoordinates(destination);
-  const [route, setRoute] = useState<LatLngTuple[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const routeKey = `${origin}|${destination}`;
+  const [routeData, setRouteData] = useState<{
+    key: string;
+    points: LatLngTuple[];
+  } | null>(null);
+
+  const loading = routeData?.key !== routeKey;
+  const route = routeData?.key === routeKey ? routeData.points : null;
 
   const height = mini ? 185 : compact ? 200 : 260;
   const googleUrl = getGoogleMapsDirectionsUrl(origin, destination);
@@ -68,17 +74,15 @@ export function RouteMapClient({
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
     fetchDrivingRoute(origin, destination).then((points) => {
       if (active) {
-        setRoute(points);
-        setLoading(false);
+        setRouteData({ key: routeKey, points });
       }
     });
     return () => {
       active = false;
     };
-  }, [origin, destination]);
+  }, [origin, destination, routeKey]);
 
   const line = route ?? [
     [from.lat, from.lng],

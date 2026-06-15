@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { VehicleTopView } from "@/components/booking/vehicle-top-view";
 import { normalizeVehicleType } from "@/lib/constants/vehicles";
@@ -23,13 +23,14 @@ export function SeatMap({
   onSelectionChange,
   currentUserId,
 }: SeatMapProps) {
-  const [seats, setSeats] = useState(initialSeats);
+  const [seatPatches, setSeatPatches] = useState<Record<string, Seat>>({});
   const supabase = createClient();
   const vehicleType = layout.vehicleType ?? normalizeVehicleType(layout.vehicleType);
 
-  useEffect(() => {
-    setSeats(initialSeats);
-  }, [initialSeats]);
+  const seats = useMemo(
+    () => initialSeats.map((seat) => seatPatches[seat.id] ?? seat),
+    [initialSeats, seatPatches]
+  );
 
   useEffect(() => {
     const channel = supabase
@@ -44,9 +45,7 @@ export function SeatMap({
         },
         (payload) => {
           const updated = payload.new as Seat;
-          setSeats((prev) =>
-            prev.map((s) => (s.id === updated.id ? updated : s))
-          );
+          setSeatPatches((prev) => ({ ...prev, [updated.id]: updated }));
         }
       )
       .subscribe();

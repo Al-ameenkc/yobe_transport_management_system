@@ -15,7 +15,6 @@ interface TripBookingClientProps {
   seats: Seat[];
   fare: number;
   userId: string;
-  userEmail: string;
 }
 
 export function TripBookingClient({
@@ -23,7 +22,6 @@ export function TripBookingClient({
   seats,
   fare,
   userId,
-  userEmail,
 }: TripBookingClientProps) {
   const router = useRouter();
   const [selectedSeatIds, setSelectedSeatIds] = useState<string[]>([]);

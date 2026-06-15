@@ -1,5 +1,5 @@
 import { getAdminClient } from "@/lib/admin/session";
-import { ADMIN_PAGE_SIZE, getPageRange, parsePageParam } from "@/lib/admin/pagination";
+import { getPageRange, parsePageParam } from "@/lib/admin/pagination";
 import { unwrapRelation } from "@/lib/supabase/helpers";
 
 export interface AdminBookingRow {

@@ -67,7 +67,6 @@ export default async function TripPage({ params }: TripPageProps) {
         seats={seats}
         fare={fare}
         userId={session?.user?.id ?? ""}
-        userEmail={session?.user?.email ?? ""}
       />
     </div>
   );
