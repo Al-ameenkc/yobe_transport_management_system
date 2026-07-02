@@ -9,6 +9,7 @@ export interface AdminBookingRow {
   total_amount: number;
   created_at: string;
   passengerName: string;
+  passengerPhone: string | null;
   ticketCode: string | null;
   origin: string;
   destination: string;
@@ -39,6 +40,28 @@ async function findBookingIdsForSearch(q: string): Promise<string[]> {
         profiles.map((p) => p.id)
       );
     userBookings?.forEach((b) => ids.add(b.id));
+  }
+
+  const { data: phoneBookings, error: phoneSearchError } = await supabase
+    .from("bookings")
+    .select("id")
+    .ilike("passenger_phone", term);
+
+  if (!phoneSearchError) {
+    phoneBookings?.forEach((b) => ids.add(b.id));
+  } else {
+    const { data: contactMatches } = await supabase
+      .from("audit_logs")
+      .select("entity_id, metadata")
+      .eq("entity_type", "booking")
+      .eq("action", "booking_contact");
+
+    for (const log of contactMatches ?? []) {
+      const phone = (log.metadata as { passenger_phone?: string } | null)?.passenger_phone;
+      if (phone?.toLowerCase().includes(q.toLowerCase()) && log.entity_id) {
+        ids.add(log.entity_id);
+      }
+    }
   }
 
   const { data: schedules } = await supabase
@@ -119,14 +142,72 @@ export async function getAdminBookings(options: {
     query = query.in("id", bookingIds);
   }
 
-  const { data, error, count } = await query.range(from, to);
+  let { data, error, count } = await query.range(from, to);
+
+  if (error?.message?.includes("passenger_phone")) {
+    query = supabase
+      .from("bookings")
+      .select(
+        `
+        id,
+        user_id,
+        status,
+        total_amount,
+        created_at,
+        schedule:schedules(departure_at, route:routes(origin, destination)),
+        ticket:tickets(ticket_code)
+      `,
+        { count: "exact" }
+      )
+      .order("created_at", { ascending: false });
+
+    if (options.status) {
+      query = query.eq("status", options.status);
+    }
+    if (bookingIds) {
+      query = query.in("id", bookingIds);
+    }
+
+    ({ data, error, count } = await query.range(from, to));
+  }
+
+  const phoneByBookingId = new Map<string, string | null>();
+  if (!error && (data ?? []).length > 0) {
+    const ids = (data ?? []).map((b) => b.id);
+    const withPhone = await supabase
+      .from("bookings")
+      .select("id, passenger_phone")
+      .in("id", ids);
+
+    if (!withPhone.error) {
+      for (const row of withPhone.data ?? []) {
+        phoneByBookingId.set(row.id, row.passenger_phone ?? null);
+      }
+    }
+  }
 
   const userIds = [...new Set((data ?? []).map((b) => b.user_id))];
+  const resultBookingIds = (data ?? []).map((b) => b.id);
   const { data: profiles } = userIds.length
     ? await supabase.from("profiles").select("id, full_name").in("id", userIds)
     : { data: [] };
 
+  const { data: contactLogs } = resultBookingIds.length
+    ? await supabase
+        .from("audit_logs")
+        .select("entity_id, metadata")
+        .eq("entity_type", "booking")
+        .eq("action", "booking_contact")
+        .in("entity_id", resultBookingIds)
+    : { data: [] };
+
   const profileMap = new Map((profiles ?? []).map((p) => [p.id, p.full_name]));
+  const contactMap = new Map(
+    (contactLogs ?? []).map((log) => [
+      log.entity_id,
+      (log.metadata as { passenger_phone?: string } | null)?.passenger_phone ?? null,
+    ])
+  );
 
   const bookings: AdminBookingRow[] = (data ?? []).map((b) => {
     const schedule = unwrapRelation(b.schedule);
@@ -140,6 +221,7 @@ export async function getAdminBookings(options: {
       total_amount: b.total_amount,
       created_at: b.created_at,
       passengerName: profileMap.get(b.user_id) ?? "Unknown passenger",
+      passengerPhone: phoneByBookingId.get(b.id) ?? contactMap.get(b.id) ?? null,
       ticketCode: ticket?.ticket_code ?? null,
       origin: route?.origin ?? "—",
       destination: route?.destination ?? "—",

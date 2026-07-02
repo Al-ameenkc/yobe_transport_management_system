@@ -21,13 +21,13 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
     <div>
       <h1 className="text-2xl font-bold">Booking Management</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Search by ticket code, passenger name, route, or bus plate number.
+        Search by ticket code, passenger name, mobile number, route, or bus plate number.
       </p>
 
       <div className="mt-6">
         <Suspense fallback={null}>
           <AdminListToolbar
-            placeholder="Ticket code, passenger, route, bus plate…"
+            placeholder="Ticket code, passenger, mobile, route, bus plate…"
             statusOptions={[
               { value: "pending", label: "Pending" },
               { value: "confirmed", label: "Confirmed" },
@@ -45,7 +45,7 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
         {bookings.length === 0 ? (
           <Card>
             <CardContent className="py-10 text-center text-sm text-slate-500">
-              No bookings found. Bookings appear here after passengers complete payment.
+              No bookings found. Bookings appear here after passengers complete checkout.
             </CardContent>
           </Card>
         ) : (
@@ -58,6 +58,7 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
                   </p>
                   <p className="text-sm text-slate-500">
                     {b.passengerName}
+                    {b.passengerPhone ? ` · ${b.passengerPhone}` : ""}
                     {b.departureAt ? ` · ${formatDateTime(b.departureAt)}` : ""}
                   </p>
                   <p className="text-sm">
