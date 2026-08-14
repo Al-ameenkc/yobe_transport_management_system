@@ -56,7 +56,7 @@ export function SupportChat() {
   return (
     <Card className="fixed bottom-6 right-6 z-50 flex w-80 flex-col shadow-xl sm:w-96">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-base">TMS Support</CardTitle>
+        <CardTitle className="text-base">YOBE LINE Support</CardTitle>
         <button onClick={() => setOpen(false)} aria-label="Close chat">
           <X className="h-4 w-4" />
         </button>

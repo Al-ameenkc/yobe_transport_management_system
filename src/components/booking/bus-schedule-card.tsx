@@ -14,9 +14,10 @@ interface BusScheduleCardProps {
   schedule: ScheduleWithDetails;
   seats: Seat[];
   fare: number;
+  boardingOrigin?: string;
 }
 
-export function BusScheduleCard({ schedule, seats, fare }: BusScheduleCardProps) {
+export function BusScheduleCard({ schedule, seats, fare, boardingOrigin }: BusScheduleCardProps) {
   const layout = schedule.bus.seat_layout as SeatLayout;
   const vehicleType = normalizeVehicleType(
     layout.vehicleType ?? schedule.bus.vehicle_type ?? schedule.bus.model
@@ -28,15 +29,16 @@ export function BusScheduleCard({ schedule, seats, fare }: BusScheduleCardProps)
   const seatList = relevantSeats.length > 0 ? relevantSeats : seats;
   const availableSeats = seatList.filter((s) => s.status === "available").length;
   const bookedSeats = seatList.filter((s) => s.status === "booked").length;
+  const origin = boardingOrigin || schedule.route.origin;
   const isWithin =
     schedule.route.route_scope === "within_yobe" ||
-    (isYobeLGA(schedule.route.origin) && isYobeLGA(schedule.route.destination));
+    (isYobeLGA(origin) && isYobeLGA(schedule.route.destination));
 
   return (
     <Card className="overflow-hidden">
       <TripRouteBanner
         layout="card"
-        origin={schedule.route.origin}
+        origin={origin}
         destination={schedule.route.destination}
         isWithin={isWithin}
         distanceKm={Number(schedule.route.distance_km)}
@@ -84,7 +86,7 @@ export function BusScheduleCard({ schedule, seats, fare }: BusScheduleCardProps)
               </span>
             </div>
 
-            <Link href={`/trips/${schedule.id}`}>
+            <Link href={`/trips/${schedule.id}${boardingOrigin ? `?from=${encodeURIComponent(boardingOrigin)}` : ""}`}>
               <Button size="sm" disabled={availableSeats === 0}>
                 {availableSeats === 0 ? "Fully Booked" : "Select Seats & Book"}
               </Button>

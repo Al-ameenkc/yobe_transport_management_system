@@ -9,15 +9,18 @@ import {
   getScheduleFare,
 } from "@/lib/booking/queries";
 import { isYobeLGA } from "@/lib/constants/lgas";
+import { displayBoardingTown } from "@/lib/constants/routes";
 import { getVehicleLabel, normalizeVehicleType } from "@/lib/constants/vehicles";
 import type { SeatLayout } from "@/types/database";
 
 interface TripPageProps {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ from?: string }>;
 }
 
-export default async function TripPage({ params }: TripPageProps) {
+export default async function TripPage({ params, searchParams }: TripPageProps) {
   const { id } = await params;
+  const { from } = await searchParams;
   const session = await getCurrentUser().catch(() => null);
 
   let schedule;
@@ -35,9 +38,10 @@ export default async function TripPage({ params }: TripPageProps) {
   const vehicleType = normalizeVehicleType(
     layout.vehicleType ?? schedule.bus.vehicle_type ?? schedule.bus.model
   );
+  const origin = displayBoardingTown(schedule.route.origin, from);
   const isWithin =
     schedule.route.route_scope === "within_yobe" ||
-    (isYobeLGA(schedule.route.origin) && isYobeLGA(schedule.route.destination));
+    (isYobeLGA(origin) && isYobeLGA(schedule.route.destination));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
@@ -48,7 +52,7 @@ export default async function TripPage({ params }: TripPageProps) {
       <div className="mt-4">
         <TripRouteBanner
           layout="page"
-          origin={schedule.route.origin}
+          origin={origin}
           destination={schedule.route.destination}
           isWithin={isWithin}
           distanceKm={Number(schedule.route.distance_km)}

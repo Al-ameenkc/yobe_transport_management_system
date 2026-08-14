@@ -5,9 +5,9 @@ import { SupportChat } from "@/components/support/support-chat";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TMS Nigeria — E-Logistics Transport Management",
+  title: "YOBE LINE — Yobe State Bus Booking",
   description:
-    "Book bus tickets online across Nigeria. Search routes, select seats, pay securely, and get e-tickets with QR verification.",
+    "Book YOBE LINE bus tickets within Yobe and to other states. Search routes, select seats, pay with Paystack, and get e-tickets with QR verification.",
 };
 
 export default async function RootLayout({
@@ -29,7 +29,7 @@ export default async function RootLayout({
         <Navbar user={navUser} />
         <main className="flex-1">{children}</main>
         <footer className="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} TMS Nigeria — E-Logistics Transport Management System
+          © {new Date().getFullYear()} YOBE LINE — Yobe State Bus Booking
         </footer>
         <SupportChat />
       </body>

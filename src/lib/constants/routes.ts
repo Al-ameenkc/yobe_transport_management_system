@@ -51,3 +51,14 @@ export function getAllowedVehiclesForDestination(destination: string): VehicleTy
 export function tripScopeToRouteScope(scope: TripScope): RouteScope {
   return scope === "within" ? "within_yobe" : "outside_yobe";
 }
+
+/** Statewide "Yobe" routes serve any selected boarding town. */
+export function displayBoardingTown(routeOrigin: string, selectedOrigin?: string) {
+  if (
+    selectedOrigin &&
+    routeOrigin.toLowerCase() === YOBE_ORIGIN.toLowerCase()
+  ) {
+    return selectedOrigin;
+  }
+  return routeOrigin;
+}

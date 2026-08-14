@@ -7,7 +7,8 @@ import { PageLoader } from "@/components/ui/page-loader";
 export default function CallbackContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const reference = searchParams.get("reference");
+  const reference =
+    searchParams.get("reference") ?? searchParams.get("trxref");
 
   useEffect(() => {
     if (reference) {

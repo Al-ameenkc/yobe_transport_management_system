@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
+import { AdminCancelBookingButton } from "@/components/admin/cancel-booking-button";
 
 interface AdminBookingsPageProps {
   searchParams: Promise<{ q?: string; status?: string; page?: string }>;
@@ -68,11 +69,14 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
                   <Badge className="mt-1">{b.status}</Badge>
                 </div>
                 {b.status === "confirmed" && (
-                  <Link href={`/tickets/${b.id}`}>
-                    <Button variant="outline" size="sm">
-                      View Ticket
-                    </Button>
-                  </Link>
+                  <div className="flex gap-2">
+                    <Link href={`/tickets/${b.id}`}>
+                      <Button variant="outline" size="sm">
+                        View Ticket
+                      </Button>
+                    </Link>
+                    <AdminCancelBookingButton bookingId={b.id} />
+                  </div>
                 )}
               </CardContent>
             </Card>

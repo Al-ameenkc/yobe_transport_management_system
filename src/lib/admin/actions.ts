@@ -9,6 +9,8 @@ import {
   getVehicleSeatLayout,
   type VehicleType,
 } from "@/lib/constants/vehicles";
+import { isYobeLGA } from "@/lib/constants/lgas";
+import { createServiceClient } from "@/lib/supabase/server";
 
 async function requireStaff() {
   const adminAuth = await isAdminPasswordAuthenticated();
@@ -67,12 +69,18 @@ export async function deleteBus(id: string) {
 export async function createRoute(formData: FormData) {
   const { supabase, profile } = await requireStaff();
 
+  const origin = formData.get("origin") as string;
+  const destination = formData.get("destination") as string;
+  const route_scope =
+    isYobeLGA(origin) && isYobeLGA(destination) ? "within_yobe" : "outside_yobe";
+
   const { error } = await supabase.from("routes").insert({
     company_id: (formData.get("company_id") as string) || profile.company_id!,
-    origin: formData.get("origin") as string,
-    destination: formData.get("destination") as string,
+    origin,
+    destination,
     distance_km: parseFloat(formData.get("distance_km") as string),
     base_fare: parseFloat(formData.get("base_fare") as string),
+    route_scope,
   });
 
   if (error) throw new Error(error.message);
@@ -129,6 +137,52 @@ export async function deleteDriver(id: string) {
   const { error } = await supabase.from("drivers").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/drivers");
+}
+
+export async function adminCancelBooking(bookingId: string) {
+  await requireStaff();
+  const supabase = await createServiceClient();
+
+  const { data: booking, error: bookingError } = await supabase
+    .from("bookings")
+    .select("id, status")
+    .eq("id", bookingId)
+    .single();
+
+  if (bookingError || !booking) throw new Error("Booking not found");
+  if (booking.status === "cancelled") return;
+  if (booking.status !== "confirmed") {
+    throw new Error("Only confirmed bookings can be cancelled");
+  }
+
+  const { data: seatRows } = await supabase
+    .from("booking_seats")
+    .select("seat_id")
+    .eq("booking_id", bookingId);
+
+  const seatIds = (seatRows ?? []).map((row) => row.seat_id);
+  if (seatIds.length) {
+    const { error: seatError } = await supabase
+      .from("seats")
+      .update({ status: "available", held_by: null, hold_expires_at: null })
+      .in("id", seatIds);
+    if (seatError) throw new Error(seatError.message);
+  }
+
+  const { error: cancelError } = await supabase
+    .from("bookings")
+    .update({ status: "cancelled" })
+    .eq("id", bookingId);
+  if (cancelError) throw new Error(cancelError.message);
+
+  await supabase
+    .from("payments")
+    .update({ status: "refunded" })
+    .eq("booking_id", bookingId)
+    .eq("status", "success");
+
+  revalidatePath("/admin/bookings");
+  revalidatePath("/bookings");
 }
 
 export async function updateUserRole(userId: string, role: string) {

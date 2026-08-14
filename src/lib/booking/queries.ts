@@ -110,7 +110,17 @@ function matchesScheduleFilters(
     }
   } else if (options.scope === "outside") {
     if (routeScope !== "outside_yobe") return false;
-    if (schedule.route.origin.toLowerCase() !== YOBE_ORIGIN.toLowerCase()) return false;
+    const routeOrigin = schedule.route.origin;
+    const statewide = routeOrigin.toLowerCase() === YOBE_ORIGIN.toLowerCase();
+    const fromTown = isYobeLGA(routeOrigin);
+    if (!statewide && !fromTown) return false;
+    if (
+      origin &&
+      !statewide &&
+      routeOrigin.toLowerCase() !== origin.toLowerCase()
+    ) {
+      return false;
+    }
     if (
       destination &&
       schedule.route.destination.toLowerCase() !== destination.toLowerCase()
@@ -133,7 +143,12 @@ function matchesScheduleFilters(
         return false;
       }
     } else {
-      if (schedule.route.origin.toLowerCase() !== YOBE_ORIGIN.toLowerCase()) return false;
+      if (
+        schedule.route.origin.toLowerCase() !== YOBE_ORIGIN.toLowerCase() &&
+        !isYobeLGA(schedule.route.origin)
+      ) {
+        return false;
+      }
       if (!isYobeDestination(schedule.route.destination)) return false;
     }
   }
@@ -257,7 +272,7 @@ export function getYobeOrigin() {
 
 export async function getOriginsAndDestinations() {
   return {
-    origins: [YOBE_ORIGIN],
+    origins: getYobeLGAs(),
     destinations: getYobeDestinations(),
     lgas: getYobeLGAs(),
   };

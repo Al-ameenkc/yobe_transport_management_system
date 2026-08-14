@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
+import { getYobeLGAs } from "@/lib/constants/lgas";
+import { YOBE_DESTINATIONS } from "@/lib/constants/routes";
 
 export default async function AdminRoutesPage() {
   const supabase = await getAdminClient();
@@ -37,12 +39,33 @@ export default async function AdminRoutesPage() {
               </Select>
             </div>
             <div>
-              <Label>Origin</Label>
-              <Input name="origin" required className="mt-1" />
+              <Label>Origin (town / LGA)</Label>
+              <Select name="origin" className="mt-1" required defaultValue="Damaturu">
+                {getYobeLGAs().map((lga) => (
+                  <option key={lga} value={lga}>
+                    {lga}
+                  </option>
+                ))}
+              </Select>
             </div>
             <div>
-              <Label>Destination</Label>
-              <Input name="destination" required className="mt-1" />
+              <Label>Destination (LGA or state)</Label>
+              <Select name="destination" className="mt-1" required>
+                <optgroup label="Yobe LGAs">
+                  {getYobeLGAs().map((lga) => (
+                    <option key={`lga-${lga}`} value={lga}>
+                      {lga}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Other states">
+                  {YOBE_DESTINATIONS.map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </optgroup>
+              </Select>
             </div>
             <div>
               <Label>Distance (km)</Label>

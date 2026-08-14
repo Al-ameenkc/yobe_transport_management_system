@@ -11,7 +11,7 @@ export async function sendTicketSms({
   destination: string;
   departureAt: string;
 }) {
-  const message = `TMS Yobe: Your ticket ${ticketCode} for ${origin} to ${destination} on ${departureAt} is confirmed. Show this code at the terminal.`;
+  const message = `YOBE LINE: Your ticket ${ticketCode} for ${origin} to ${destination} on ${departureAt} is confirmed. Show this code at the terminal.`;
 
   if (process.env.TERMII_API_KEY && process.env.TERMII_SENDER_ID) {
     const res = await fetch("https://api.ng.termii.com/api/sms/send", {
