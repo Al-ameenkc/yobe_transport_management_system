@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.9 - Entity Relationship Diagram</title>
+  <style>
+    body { font-family: "Times New Roman", Times, serif; background:#fff; color:#111; padding:24px; width:1200px; margin:0; }
+    h1 { text-align:center; font-size:18px; margin-bottom:14px; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:10px; }
+    .entity { font-size:11px; }
+    .ent-title { font-weight:bold; fill:#111; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.9: Entity-Relationship Diagram (Core Data Model)</h1>
+  <svg width="1140" height="760" xmlns="http://www.w3.org/2000/svg" class="entity">
+    <!-- COMPANIES -->
+    <rect x="40" y="60" width="140" height="70" fill="#eef6ff" stroke="#111"/>
+    <text x="110" y="85" text-anchor="middle" class="ent-title">COMPANIES</text>
+    <text x="110" y="102" text-anchor="middle">id (PK)</text>
+    <text x="110" y="117" text-anchor="middle">name, phone</text>
+
+    <!-- PROFILES -->
+    <rect x="240" y="40" width="140" height="90" fill="#eef6ff" stroke="#111"/>
+    <text x="310" y="65" text-anchor="middle" class="ent-title">PROFILES</text>
+    <text x="310" y="82" text-anchor="middle">id (PK, FK)</text>
+    <text x="310" y="97" text-anchor="middle">full_name, role</text>
+    <text x="310" y="112" text-anchor="middle">company_id (FK)</text>
+
+    <!-- BUSES -->
+    <rect x="40" y="200" width="140" height="90" fill="#eef6ff" stroke="#111"/>
+    <text x="110" y="225" text-anchor="middle" class="ent-title">BUSES</text>
+    <text x="110" y="242" text-anchor="middle">id (PK)</text>
+    <text x="110" y="257" text-anchor="middle">company_id (FK)</text>
+    <text x="110" y="272" text-anchor="middle">vehicle_type, capacity</text>
+
+    <!-- ROUTES -->
+    <rect x="240" y="200" width="140" height="90" fill="#eef6ff" stroke="#111"/>
+    <text x="310" y="225" text-anchor="middle" class="ent-title">ROUTES</text>
+    <text x="310" y="242" text-anchor="middle">id (PK)</text>
+    <text x="310" y="257" text-anchor="middle">origin, destination</text>
+    <text x="310" y="272" text-anchor="middle">base_fare</text>
+
+    <!-- DRIVERS -->
+    <rect x="440" y="60" width="140" height="70" fill="#eef6ff" stroke="#111"/>
+    <text x="510" y="85" text-anchor="middle" class="ent-title">DRIVERS</text>
+    <text x="510" y="102" text-anchor="middle">id (PK)</text>
+    <text x="510" y="117" text-anchor="middle">company_id (FK)</text>
+
+    <!-- SCHEDULES -->
+    <rect x="440" y="220" width="150" height="90" fill="#fff8e6" stroke="#111"/>
+    <text x="515" y="245" text-anchor="middle" class="ent-title">SCHEDULES</text>
+    <text x="515" y="262" text-anchor="middle">id (PK)</text>
+    <text x="515" y="277" text-anchor="middle">route_id (FK), bus_id (FK)</text>
+    <text x="515" y="292" text-anchor="middle">departure_at, status</text>
+
+    <!-- SEATS -->
+    <rect x="660" y="220" width="140" height="90" fill="#fff8e6" stroke="#111"/>
+    <text x="730" y="245" text-anchor="middle" class="ent-title">SEATS</text>
+    <text x="730" y="262" text-anchor="middle">id (PK)</text>
+    <text x="730" y="277" text-anchor="middle">schedule_id (FK)</text>
+    <text x="730" y="292" text-anchor="middle">seat_number, status</text>
+
+    <!-- BOOKINGS -->
+    <rect x="660" y="390" width="150" height="90" fill="#e8f4ea" stroke="#111"/>
+    <text x="735" y="415" text-anchor="middle" class="ent-title">BOOKINGS</text>
+    <text x="735" y="432" text-anchor="middle">id (PK)</text>
+    <text x="735" y="447" text-anchor="middle">user_id (FK)</text>
+    <text x="735" y="462" text-anchor="middle">schedule_id (FK), status</text>
+
+    <!-- BOOKING_SEATS -->
+    <rect x="860" y="300" width="150" height="70" fill="#e8f4ea" stroke="#111"/>
+    <text x="935" y="325" text-anchor="middle" class="ent-title">BOOKING_SEATS</text>
+    <text x="935" y="342" text-anchor="middle">booking_id (FK)</text>
+    <text x="935" y="357" text-anchor="middle">seat_id (FK)</text>
+
+    <!-- TICKETS -->
+    <rect x="860" y="420" width="140" height="70" fill="#e8f4ea" stroke="#111"/>
+    <text x="930" y="445" text-anchor="middle" class="ent-title">TICKETS</text>
+    <text x="930" y="462" text-anchor="middle">booking_id (FK)</text>
+    <text x="930" y="477" text-anchor="middle">ticket_code, qr_payload</text>
+
+    <!-- PAYMENTS -->
+    <rect x="660" y="540" width="150" height="80" fill="#e8f4ea" stroke="#111"/>
+    <text x="735" y="565" text-anchor="middle" class="ent-title">PAYMENTS</text>
+    <text x="735" y="582" text-anchor="middle">id (PK)</text>
+    <text x="735" y="597" text-anchor="middle">booking_id (FK)</text>
+    <text x="735" y="612" text-anchor="middle">reference, status</text>
+
+    <!-- AUDIT_LOGS -->
+    <rect x="440" y="540" width="150" height="80" fill="#f7ecff" stroke="#111"/>
+    <text x="515" y="565" text-anchor="middle" class="ent-title">AUDIT_LOGS</text>
+    <text x="515" y="582" text-anchor="middle">id (PK)</text>
+    <text x="515" y="597" text-anchor="middle">user_id (FK)</text>
+    <text x="515" y="612" text-anchor="middle">action, entity_type</text>
+
+    <!-- Relationships -->
+    <line x1="180" y1="95" x2="240" y2="95" stroke="#111"/><text x="210" y="88" text-anchor="middle">1</text><text x="225" y="88" text-anchor="middle">M</text>
+    <line x1="110" y1="130" x2="110" y2="200" stroke="#111"/><text x="118" y="170">1:M</text>
+    <line x1="180" y1="245" x2="240" y2="245" stroke="#111"/><text x="210" y="238" text-anchor="middle">M</text>
+    <line x1="380" y1="245" x2="440" y2="255" stroke="#111"/><text x="410" y="238">1:M</text>
+    <line x1="180" y1="245" x2="430" y2="255" stroke="#111"/><text x="300" y="225">1:M</text>
+    <line x1="590" y1="265" x2="660" y2="265" stroke="#111"/><text x="625" y="258">1:M</text>
+    <line x1="735" y1="310" x2="735" y2="390" stroke="#111"/><text x="745" y="350">1:M</text>
+    <line x1="800" y1="435" x2="860" y2="335" stroke="#111"/><text x="825" y="380">M:M</text>
+    <line x1="810" y1="450" x2="860" y2="450" stroke="#111"/><text x="835" y="443">1:1</text>
+    <line x1="735" y1="480" x2="735" y2="540" stroke="#111"/><text x="745" y="515">1:M</text>
+    <line x1="310" y1="130" x2="515" y2="540" stroke="#111" stroke-dasharray="4,4"/><text x="360" y="340">logs</text>
+  </svg>
+  <p class="caption">Core entity-relationship model for companies, fleet, schedules, bookings, tickets, and payments</p>
+</body>
+</html>

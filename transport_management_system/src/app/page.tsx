@@ -12,7 +12,7 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-emerald-700 to-emerald-900 px-4 py-16 text-white sm:px-6">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Yobe State Bus Booking
+            YOBE LINE Bus Booking
           </h1>
           <p className="mt-4 text-lg text-emerald-100">
             Travel within Yobe (between LGAs) or outside to Abuja, Kano, Kaduna, and other
@@ -32,7 +32,7 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <h2 className="text-center text-2xl font-bold text-slate-900">
-          Why Use TMS Yobe?
+          Why Use YOBE LINE?
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[

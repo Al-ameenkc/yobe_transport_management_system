@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.5 - Proposed System Modules</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Times New Roman", Times, serif; background: #fff; color: #111; padding: 36px; width: 1100px; }
+    h1 { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 24px; }
+    .root {
+      width: 360px; margin: 0 auto 24px; border: 3px solid #111; background: #eef6ff;
+      text-align: center; font-size: 16px; font-weight: bold; padding: 16px;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 980px; margin: 0 auto; }
+    .module { border: 2px solid #111; padding: 14px; background: #fafafa; }
+    .module h2 { font-size: 15px; margin-bottom: 10px; text-align: center; }
+    .module ul { margin-left: 18px; font-size: 13px; line-height: 1.55; }
+    .caption { margin-top: 18px; text-align: center; font-size: 13px; color: #444; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.5: Functional Modules of the Proposed System</h1>
+  <div class="root">Yobe State E-Transport Booking and Management System</div>
+  <div class="grid">
+    <div class="module">
+      <h2>Passenger Module</h2>
+      <ul>
+        <li>User registration and login</li>
+        <li>Route and schedule search</li>
+        <li>Interactive seat map selection</li>
+        <li>Online checkout and payment</li>
+        <li>E-ticket with QR code</li>
+        <li>Booking history and cancellation</li>
+      </ul>
+    </div>
+    <div class="module">
+      <h2>Administration Module</h2>
+      <ul>
+        <li>Secure admin authentication</li>
+        <li>Company and bus management</li>
+        <li>Route and schedule management</li>
+        <li>Driver management</li>
+        <li>Booking oversight</li>
+        <li>Ticket verification</li>
+      </ul>
+    </div>
+    <div class="module">
+      <h2>Payment &amp; Notification Module</h2>
+      <ul>
+        <li>Paystack / mock payment processing</li>
+        <li>Payment verification webhooks</li>
+        <li>Email ticket delivery</li>
+        <li>SMS booking notifications</li>
+        <li>Payment status tracking</li>
+      </ul>
+    </div>
+    <div class="module">
+      <h2>Reporting &amp; Support Module</h2>
+      <ul>
+        <li>Operational reports and charts</li>
+        <li>Admin insights dashboard</li>
+        <li>Route map and directions</li>
+        <li>AI support chat assistance</li>
+        <li>Audit and activity logging</li>
+      </ul>
+    </div>
+  </div>
+  <p class="caption">Modular decomposition of the proposed system into passenger, admin, payment, and reporting components</p>
+</body>
+</html>

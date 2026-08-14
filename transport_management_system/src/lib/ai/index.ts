@@ -9,7 +9,7 @@ export async function chatWithSupport(
   context?: string
 ) {
   if (!openai) {
-    return "AI support is not configured. Please contact support@tms.ng or call +234 800 TMS HELP.";
+    return "AI support is not configured. Please contact YOBE LINE support.";
   }
 
   const response = await openai.chat.completions.create({
@@ -17,7 +17,7 @@ export async function chatWithSupport(
     messages: [
       {
         role: "system",
-        content: `You are a helpful customer support assistant for TMS Nigeria, an E-Logistics bus booking platform. Help passengers with booking, tickets, cancellations, and travel info. Be concise and friendly.${context ? `\n\nContext:\n${context}` : ""}`,
+        content: `You are a helpful customer support assistant for YOBE LINE, a Yobe State bus booking platform. Help passengers with booking, tickets, cancellations, and travel info. Be concise and friendly.${context ? `\n\nContext:\n${context}` : ""}`,
       },
       ...messages,
     ],
@@ -59,7 +59,7 @@ export async function parseSmartSearch(query: string) {
     messages: [
       {
         role: "system",
-        content: `Parse bus search queries for Yobe State transport into JSON with fields: destination (one of Abuja, Jos, Bauchi, Kano, Kaduna, Nasarawa, Niger, Sokoto, Zamfara), date (YYYY-MM-DD). Origin is always Yobe. If date is relative like "tomorrow", compute from today ${new Date().toISOString().split("T")[0]}. Return only valid JSON.`,
+        content: `Parse bus search queries for YOBE LINE into JSON with fields: origin (a Yobe town/LGA such as Damaturu, Gashua, Potiskum, Nguru), destination (Abuja, Jos, Bauchi, Kano, Kaduna, Nasarawa, Niger, Sokoto, Zamfara, or a Yobe LGA), date (YYYY-MM-DD), scope ("within" or "outside"). If date is relative like "tomorrow", compute from today ${new Date().toISOString().split("T")[0]}. Return only valid JSON.`,
       },
       { role: "user", content: query },
     ],

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.2 - Existing System Actors</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: #fff;
+      color: #111;
+      padding: 40px;
+      width: 1100px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .diagram {
+      position: relative;
+      width: 1000px;
+      height: 620px;
+      margin: 0 auto;
+    }
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 120px;
+      border: 3px solid #111;
+      background: #eef6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px;
+    }
+    .actor {
+      position: absolute;
+      width: 180px;
+      min-height: 78px;
+      border: 2px solid #111;
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 14px;
+      padding: 10px;
+    }
+    .a1 { top: 20px; left: 410px; }
+    .a2 { top: 150px; left: 60px; }
+    .a3 { top: 150px; right: 60px; }
+    .a4 { bottom: 150px; left: 60px; }
+    .a5 { bottom: 150px; right: 60px; }
+    .a6 { bottom: 20px; left: 410px; }
+    .line {
+      position: absolute;
+      background: #111;
+    }
+    .caption {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.2: Stakeholders in the Existing Manual Transport System</h1>
+  <div class="diagram">
+    <svg width="1000" height="620" style="position:absolute;top:0;left:0;">
+      <line x1="500" y1="98" x2="500" y2="250" stroke="#111" stroke-width="2"/>
+      <line x1="150" y1="228" x2="350" y2="280" stroke="#111" stroke-width="2"/>
+      <line x1="850" y1="228" x2="650" y2="280" stroke="#111" stroke-width="2"/>
+      <line x1="150" y1="392" x2="350" y2="342" stroke="#111" stroke-width="2"/>
+      <line x1="850" y1="392" x2="650" y2="342" stroke="#111" stroke-width="2"/>
+      <line x1="500" y1="522" x2="500" y2="370" stroke="#111" stroke-width="2"/>
+    </svg>
+    <div class="actor a1">Passenger</div>
+    <div class="actor a2">Booking Clerk / Agent</div>
+    <div class="actor a3">Motor Park Attendant</div>
+    <div class="actor a4">Driver / Conductor</div>
+    <div class="actor a5">Transport Manager</div>
+    <div class="center">Manual Transport Operations<br />(Paper tickets, manifests, cash records)</div>
+    <div class="actor a6">Paper Records &amp; Ledgers</div>
+  </div>
+  <p class="caption">The existing system depends on human coordination and physical documentation without a centralized digital platform.</p>
+</body>
+</html>

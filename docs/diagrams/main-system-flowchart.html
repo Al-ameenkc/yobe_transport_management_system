@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.11 - Main System Flowchart</title>
+  <style>
+    body { font-family: "Times New Roman", Times, serif; background:#fff; color:#111; padding:28px; width:900px; margin:0 auto; }
+    h1 { text-align:center; font-size:18px; margin-bottom:20px; }
+    .flow { display:flex; flex-direction:column; align-items:center; }
+    .term { width:200px; border:2px solid #111; border-radius:50%; padding:14px; text-align:center; font-size:13px; background:#e8f4ea; }
+    .proc { width:340px; border:2px solid #111; padding:12px; text-align:center; font-size:13px; background:#eef6ff; }
+    .dec { width:180px; height:100px; background:#fff8e6; border:2px solid #111; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%); display:flex; align-items:center; justify-content:center; text-align:center; font-size:12px; padding:8px; }
+    .arrow { width:2px; height:22px; background:#111; position:relative; }
+    .arrow::after { content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:9px solid #111; }
+    .side { font-size:12px; font-style:italic; color:#333; margin:2px 0; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.11: Main System Flowchart for Online Booking</h1>
+  <div class="flow">
+    <div class="term">START</div><div class="arrow"></div>
+    <div class="proc">Passenger opens web application</div><div class="arrow"></div>
+    <div class="proc">Enter origin, destination, and travel date</div><div class="arrow"></div>
+    <div class="proc">System retrieves matching schedules and fares</div><div class="arrow"></div>
+    <div class="dec">Schedule found?</div>
+    <div class="side">No → Display "No trips available" and END</div><div class="arrow"></div>
+    <div class="proc">Passenger selects schedule and opens seat map</div><div class="arrow"></div>
+    <div class="proc">System displays available seats in real time</div><div class="arrow"></div>
+    <div class="dec">User authenticated?</div>
+    <div class="side">No → Redirect to login/register</div><div class="arrow"></div>
+    <div class="proc">Hold selected seats for limited time</div><div class="arrow"></div>
+    <div class="dec">Seats held successfully?</div>
+    <div class="side">No → Show error and return to seat map</div><div class="arrow"></div>
+    <div class="proc">Passenger enters phone and proceeds to checkout</div><div class="arrow"></div>
+    <div class="proc">Process payment (Paystack / offline / mock)</div><div class="arrow"></div>
+    <div class="dec">Payment successful?</div>
+    <div class="side">No → Release hold and show payment failure</div><div class="arrow"></div>
+    <div class="proc">Confirm booking, generate ticket and QR code</div><div class="arrow"></div>
+    <div class="proc">Send email/SMS notification to passenger</div><div class="arrow"></div>
+    <div class="term">END</div>
+  </div>
+  <p class="caption">High-level flowchart for the proposed online booking process</p>
+</body>
+</html>

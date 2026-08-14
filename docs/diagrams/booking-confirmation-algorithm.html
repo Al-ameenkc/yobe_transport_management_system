@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.13 - Booking Confirmation Algorithm</title>
+  <style>
+    body { font-family: "Times New Roman", Times, serif; background:#fff; color:#111; padding:28px; width:900px; margin:0 auto; }
+    h1 { text-align:center; font-size:18px; margin-bottom:20px; }
+    .flow { display:flex; flex-direction:column; align-items:center; }
+    .term { width:180px; border:2px solid #111; border-radius:50%; padding:12px; text-align:center; font-size:13px; background:#e8f4ea; }
+    .proc { width:400px; border:2px solid #111; padding:12px; text-align:center; font-size:13px; background:#eef6ff; }
+    .dec { width:210px; height:105px; background:#fff8e6; border:2px solid #111; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%); display:flex; align-items:center; justify-content:center; text-align:center; font-size:12px; padding:10px; }
+    .arrow { width:2px; height:22px; background:#111; position:relative; }
+    .arrow::after { content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border-left:6px solid transparent; border-right:6px solid transparent; border-top:9px solid #111; }
+    .side { font-size:12px; font-style:italic; color:#333; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.13: Flowchart for Booking Confirmation Algorithm</h1>
+  <div class="flow">
+    <div class="term">START</div><div class="arrow"></div>
+    <div class="proc">Input: schedule_id, seat_ids[], user_id, payment_ref, amount</div><div class="arrow"></div>
+    <div class="dec">Payment reference already exists?</div>
+    <div class="side">Yes → Return existing booking_id and ticket_code</div><div class="arrow"></div>
+    <div class="proc">Verify seats are held by user or still available</div><div class="arrow"></div>
+    <div class="dec">Seats valid?</div>
+    <div class="side">No → Raise error: seats no longer available</div><div class="arrow"></div>
+    <div class="proc">INSERT booking record with status = 'confirmed'</div><div class="arrow"></div>
+    <div class="proc">UPDATE seats to status = 'booked'; INSERT booking_seats</div><div class="arrow"></div>
+    <div class="proc">Generate ticket_code and qr_payload; INSERT ticket</div><div class="arrow"></div>
+    <div class="proc">INSERT payment record with status = 'success'</div><div class="arrow"></div>
+    <div class="proc">Return booking_id and ticket_code to application</div><div class="arrow"></div>
+    <div class="term">END</div>
+  </div>
+  <p class="caption">Algorithm flowchart for confirming booking after successful payment</p>
+</body>
+</html>

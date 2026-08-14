@@ -27,7 +27,7 @@ export async function sendBookingConfirmation({
   }
 
   const { error } = await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || "TMS <onboarding@resend.dev>",
+    from: process.env.RESEND_FROM_EMAIL || "YOBE LINE <onboarding@resend.dev>",
     to,
     subject: `Booking Confirmed — ${ticketCode}`,
     html: `
@@ -63,7 +63,7 @@ export async function sendCancellationEmail({
   }
 
   const { error } = await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || "TMS <onboarding@resend.dev>",
+    from: process.env.RESEND_FROM_EMAIL || "YOBE LINE <onboarding@resend.dev>",
     to,
     subject: `Booking Cancelled — ${ticketCode}`,
     html: `

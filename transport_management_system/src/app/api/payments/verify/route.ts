@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { verifyPaystackPayment } from "@/lib/payments";
 import { confirmBooking } from "@/lib/booking/actions";
 import { sendBookingNotifications } from "@/lib/notifications/booking";
+
 export async function POST(request: Request) {
   const { reference } = await request.json();
 
@@ -19,30 +20,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  if (process.env.PAYSTACK_SECRET_KEY) {
-    const verified = await verifyPaystackPayment(reference);
-    if (!verified) {
+  try {
+    const payment = await verifyPaystackPayment(reference);
+    if (!payment.success) {
       return NextResponse.json({ error: "Payment not verified" }, { status: 400 });
     }
 
-    const res = await fetch(
-      `https://api.paystack.co/transaction/verify/${reference}`,
-      {
-        headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
-      }
-    );
-    const paystackData = await res.json();
-    const metadata = paystackData.data?.metadata ?? {};
-    const scheduleId = metadata.schedule_id;
-    const seatIds = (metadata.seat_ids as string)?.split(",").filter(Boolean) ?? [];
-    const amount = paystackData.data.amount / 100;
+    const scheduleId = payment.metadata.schedule_id;
+    const seatIds = (payment.metadata.seat_ids ?? "").split(",").filter(Boolean);
+    const passengerPhone = payment.metadata.passenger_phone;
+
+    if (!scheduleId || seatIds.length === 0) {
+      return NextResponse.json({ error: "Invalid payment metadata" }, { status: 400 });
+    }
 
     const result = await confirmBooking(
       scheduleId,
       seatIds,
-      amount,
-      reference,
-      "paystack"
+      payment.amount,
+      payment.reference,
+      "paystack",
+      passengerPhone
     );
 
     if (result?.booking_id) {
@@ -50,17 +48,8 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ bookingId: result?.booking_id });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Verification failed";
+    return NextResponse.json({ error: message }, { status: 400 });
   }
-
-  const { data: existing } = await supabase
-    .from("payments")
-    .select("booking_id")
-    .eq("reference", reference)
-    .single();
-
-  if (existing) {
-    return NextResponse.json({ bookingId: existing.booking_id });
-  }
-
-  return NextResponse.json({ error: "Payment not found" }, { status: 404 });
 }

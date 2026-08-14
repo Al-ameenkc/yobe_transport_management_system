@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.7 - Component Architecture Model</title>
+  <style>
+    body { font-family: "Times New Roman", Times, serif; background:#fff; color:#111; padding:30px; width:1150px; margin:0; }
+    h1 { text-align:center; font-size:18px; margin-bottom:20px; }
+    svg { display:block; margin:0 auto; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.7: Component Architecture Model</h1>
+  <svg width="1080" height="620" xmlns="http://www.w3.org/2000/svg">
+    <rect x="40" y="40" width="1000" height="90" fill="#e8f4ea" stroke="#111" stroke-width="2"/>
+    <text x="540" y="70" text-anchor="middle" font-size="16" font-weight="bold">Client Components</text>
+    <text x="540" y="95" text-anchor="middle" font-size="13">React UI Pages | Seat Map | Search Form | Admin Dashboard | Ticket View</text>
+
+    <line x1="540" y1="130" x2="540" y2="160" stroke="#111" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="160" width="1000" height="110" fill="#eef6ff" stroke="#111" stroke-width="2"/>
+    <text x="540" y="190" text-anchor="middle" font-size="16" font-weight="bold">Application / Service Components (Next.js App Router)</text>
+    <text x="180" y="220" text-anchor="middle" font-size="12">Booking Actions</text>
+    <text x="360" y="220" text-anchor="middle" font-size="12">Payment API</text>
+    <text x="540" y="220" text-anchor="middle" font-size="12">Ticket Service</text>
+    <text x="720" y="220" text-anchor="middle" font-size="12">Admin Actions</text>
+    <text x="900" y="220" text-anchor="middle" font-size="12">Auth Middleware</text>
+    <line x1="80" y1="235" x2="1000" y2="235" stroke="#111"/>
+    <text x="540" y="255" text-anchor="middle" font-size="12">Server Components + API Routes + RPC Calls</text>
+
+    <line x1="540" y1="270" x2="540" y2="300" stroke="#111" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="300" width="1000" height="100" fill="#fff8e6" stroke="#111" stroke-width="2"/>
+    <text x="540" y="330" text-anchor="middle" font-size="16" font-weight="bold">Data Access Components (Supabase Client / Server)</text>
+    <text x="540" y="355" text-anchor="middle" font-size="13">PostgreSQL Tables | RPC Functions | Auth | Row Level Security | Realtime Channels</text>
+
+    <line x1="540" y1="400" x2="540" y2="430" stroke="#111" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="430" width="1000" height="90" fill="#f7ecff" stroke="#111" stroke-width="2"/>
+    <text x="540" y="460" text-anchor="middle" font-size="16" font-weight="bold">Integration Components</text>
+    <text x="540" y="485" text-anchor="middle" font-size="13">Paystack | Resend Email | SMS Gateway | Google Maps | OpenAI Support</text>
+
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+        <path d="M0,0 L8,3 L0,6 Z" fill="#111"/>
+      </marker>
+    </defs>
+  </svg>
+  <p class="caption">Component-based architecture showing separation of UI, application logic, data access, and external integrations</p>
+</body>
+</html>

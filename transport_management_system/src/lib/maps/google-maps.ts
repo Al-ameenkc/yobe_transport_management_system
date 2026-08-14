@@ -1,7 +1,5 @@
 import { isYobeLGA } from "@/lib/constants/lgas";
 import { YOBE_ORIGIN } from "@/lib/constants/routes";
-import { inferTripScope } from "@/lib/constants/locations";
-
 export function formatGoogleMapsPlace(name: string, role: "origin" | "destination") {
   if (isYobeLGA(name)) {
     return `${name}, Yobe State, Nigeria`;
@@ -16,7 +14,6 @@ export function formatGoogleMapsPlace(name: string, role: "origin" | "destinatio
 }
 
 export function getGoogleMapsDirectionsUrl(origin: string, destination: string) {
-  const scope = inferTripScope(origin, destination);
   const originPlace = formatGoogleMapsPlace(origin, "origin");
   const destPlace = formatGoogleMapsPlace(destination, "destination");
 
@@ -31,7 +28,6 @@ export function getGoogleMapsDirectionsUrl(origin: string, destination: string) 
 }
 
 export function getGoogleMapsEmbedUrl(origin: string, destination: string) {
-  const directionsUrl = getGoogleMapsDirectionsUrl(origin, destination);
   return `https://maps.google.com/maps?${new URLSearchParams({
     saddr: formatGoogleMapsPlace(origin, "origin"),
     daddr: formatGoogleMapsPlace(destination, "destination"),

@@ -5,7 +5,6 @@ import {
   getAvailableSchedules,
   getScheduleFare,
 } from "@/lib/booking/queries";
-import { YOBE_ORIGIN } from "@/lib/constants/routes";
 
 export async function TodaySchedules() {
   const todaySchedules = await getAvailableSchedules().catch(() => []);
@@ -16,7 +15,7 @@ export async function TodaySchedules() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-slate-900">
-            Today&apos;s Buses from {YOBE_ORIGIN}
+            Today&apos;s Buses
           </h2>
           <p className="mt-1 text-slate-500">
             {todaySchedules.length} bus{todaySchedules.length !== 1 ? "es" : ""} available — seat

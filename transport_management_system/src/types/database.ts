@@ -144,6 +144,7 @@ export interface Database {
           schedule_id: string;
           status: BookingStatus;
           total_amount: number;
+          passenger_phone: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -152,6 +153,7 @@ export interface Database {
           schedule_id: string;
           status?: BookingStatus;
           total_amount: number;
+          passenger_phone?: string | null;
         };
         Update: Partial<Database["public"]["Tables"]["bookings"]["Insert"]>;
       };
@@ -258,6 +260,7 @@ export interface Database {
           p_payment_ref: string;
           p_amount: number;
           p_provider?: string;
+          p_passenger_phone?: string;
         };
         Returns: {
           booking_id: string;

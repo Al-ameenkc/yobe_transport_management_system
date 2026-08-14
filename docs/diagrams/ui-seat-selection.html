@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seat Selection Interface</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; padding: 24px; width: 1100px; }
+    .nav { display:flex; justify-content:space-between; align-items:center; padding:12px 0 20px; border-bottom:1px solid #e2e8f0; margin-bottom:24px; }
+    .brand { font-weight:700; color:#047857; font-size:20px; }
+    h1 { font-size:24px; margin-bottom:8px; }
+    .sub { color:#64748b; margin-bottom:20px; }
+    .grid { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:24px; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:20px; }
+    .bus { background:#f1f5f9; border-radius:16px; padding:24px; }
+    .front { text-align:center; font-size:12px; color:#64748b; margin-bottom:12px; }
+    .seats { display:grid; grid-template-columns: repeat(4, 56px); gap:10px; justify-content:center; }
+    .seat { width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; border:2px solid transparent; }
+    .available { background:#d1fae5; color:#065f46; border-color:#6ee7b7; }
+    .selected { background:#047857; color:#fff; border-color:#065f46; }
+    .booked { background:#e2e8f0; color:#94a3b8; }
+    .held { background:#fef3c7; color:#92400e; }
+    .legend { display:flex; gap:12px; margin-top:16px; font-size:12px; flex-wrap:wrap; justify-content:center; }
+    .item { display:flex; align-items:center; gap:6px; }
+    .dot { width:14px; height:14px; border-radius:4px; }
+    .summary { font-size:14px; line-height:1.7; }
+    .btn { margin-top:16px; width:100%; background:#047857; color:#fff; border:none; border-radius:8px; padding:12px; font-size:15px; font-weight:600; }
+    .price { font-size:28px; color:#047857; font-weight:700; margin:12px 0; }
+    .caption { text-align:center; font-family:"Times New Roman", serif; margin-top:16px; font-size:13px; color:#444; }
+  </style>
+</head>
+<body>
+  <div class="nav"><div class="brand">TMS Yobe</div><div>Login | Register</div></div>
+  <h1>Yobe → Abuja</h1>
+  <p class="sub">Toyota Bus • Departure: 15 Jul 2026, 06:00 • Plate: YBE-101-AA</p>
+  <div class="grid">
+    <div class="card">
+      <div class="bus">
+        <div class="front">FRONT / DRIVER</div>
+        <div class="seats">
+          <div class="seat booked">1A</div><div class="seat booked">1B</div><div class="seat available">1C</div><div class="seat available">1D</div>
+          <div class="seat available">2A</div><div class="seat selected">2B</div><div class="seat selected">2C</div><div class="seat available">2D</div>
+          <div class="seat available">3A</div><div class="seat held">3B</div><div class="seat available">3C</div><div class="seat booked">3D</div>
+          <div class="seat available">4A</div><div class="seat available">4B</div><div class="seat available">4C</div><div class="seat available">4D</div>
+        </div>
+        <div class="legend">
+          <div class="item"><span class="dot" style="background:#d1fae5"></span>Available</div>
+          <div class="item"><span class="dot" style="background:#047857"></span>Selected</div>
+          <div class="item"><span class="dot" style="background:#e2e8f0"></span>Booked</div>
+          <div class="item"><span class="dot" style="background:#fef3c7"></span>Held</div>
+        </div>
+      </div>
+    </div>
+    <div class="card summary">
+      <h2 style="font-size:18px; margin-bottom:8px;">Booking Summary</h2>
+      <p><strong>Route:</strong> Yobe to Abuja</p>
+      <p><strong>Seats selected:</strong> 2B, 2C</p>
+      <p><strong>Vehicle:</strong> Toyota Bus (19 seats)</p>
+      <div class="price">₦28,000</div>
+      <button class="btn">Continue to Checkout</button>
+    </div>
+  </div>
+  <p class="caption">Figure 4.3: Seat Selection Module Interface</p>
+</body>
+</html>

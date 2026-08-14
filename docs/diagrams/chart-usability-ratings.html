@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chart 4.3 - Usability Ratings</title>
+  <style>
+    body { font-family: "Times New Roman", serif; background:#fff; padding:30px; width:900px; margin:0 auto; }
+    h1 { text-align:center; font-size:18px; margin-bottom:24px; }
+    .chart { display:flex; justify-content:center; gap:40px; align-items:center; }
+    .pie { width:220px; height:220px; border-radius:50%; background:conic-gradient(#047857 0 72%, #93c5fd 72% 88%, #fde68a 88% 96%, #fca5a5 96% 100%); border:2px solid #111; }
+    .legend { font-size:14px; line-height:1.9; }
+    .dot { display:inline-block; width:12px; height:12px; margin-right:8px; vertical-align:middle; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <h1>Chart 4.3: Simulated User Acceptance Ratings</h1>
+  <div class="chart">
+    <div class="pie"></div>
+    <div class="legend">
+      <div><span class="dot" style="background:#047857"></span>Excellent (72%)</div>
+      <div><span class="dot" style="background:#93c5fd"></span>Good (16%)</div>
+      <div><span class="dot" style="background:#fde68a"></span>Fair (8%)</div>
+      <div><span class="dot" style="background:#fca5a5"></span>Poor (4%)</div>
+    </div>
+  </div>
+  <p class="caption">Distribution of usability ratings from 25 simulated passenger and admin evaluators</p>
+</body>
+</html>

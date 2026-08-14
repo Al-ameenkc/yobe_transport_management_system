@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard Interface</title>
+  <style>
+    body { margin:0; font-family: system-ui, sans-serif; background:#f8fafc; color:#0f172a; }
+    .layout { display:grid; grid-template-columns: 240px 1fr; min-height:700px; }
+    .side { background:#0f172a; color:#fff; padding:20px; }
+    .side h2 { font-size:18px; color:#6ee7b7; margin-bottom:20px; }
+    .side a { display:block; color:#cbd5e1; text-decoration:none; padding:8px 0; font-size:14px; }
+    .main { padding:24px; }
+    h1 { font-size:28px; margin-bottom:20px; }
+    .cards { display:grid; grid-template-columns: repeat(4,1fr); gap:16px; margin-bottom:24px; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; }
+    .card .label { color:#64748b; font-size:13px; }
+    .card .value { font-size:28px; font-weight:700; margin-top:8px; color:#047857; }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; }
+    th, td { padding:12px; text-align:left; border-bottom:1px solid #e2e8f0; font-size:14px; }
+    th { background:#f1f5f9; }
+    .caption { text-align:center; font-family:"Times New Roman", serif; margin:16px 0; font-size:13px; color:#444; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="side">
+      <h2>Admin Panel</h2>
+      <a>Dashboard</a><a>Buses</a><a>Routes</a><a>Schedules</a><a>Drivers</a><a>Bookings</a><a>Reports</a>
+    </aside>
+    <main class="main">
+      <h1>Dashboard</h1>
+      <div class="cards">
+        <div class="card"><div class="label">Total Bookings</div><div class="value">128</div></div>
+        <div class="card"><div class="label">Total Revenue</div><div class="value">₦1.8M</div></div>
+        <div class="card"><div class="label">Active Routes</div><div class="value">12</div></div>
+        <div class="card"><div class="label">Occupancy Rate</div><div class="value">74%</div></div>
+      </div>
+      <h2 style="font-size:18px; margin-bottom:12px;">Recent Bookings</h2>
+      <table>
+        <tr><th>Route</th><th>Departure</th><th>Amount</th><th>Status</th></tr>
+        <tr><td>Yobe → Abuja</td><td>15 Jul 2026, 06:00</td><td>₦28,000</td><td>confirmed</td></tr>
+        <tr><td>Yobe → Kano</td><td>15 Jul 2026, 14:00</td><td>₦16,000</td><td>confirmed</td></tr>
+        <tr><td>Damaturu → Potiskum</td><td>16 Jul 2026, 08:00</td><td>₦3,500</td><td>confirmed</td></tr>
+      </table>
+    </main>
+  </div>
+  <p class="caption">Figure 4.6: Admin Dashboard Module Interface</p>
+</body>
+</html>

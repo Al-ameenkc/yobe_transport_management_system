@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.4 - Proposed System Architecture</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Times New Roman", Times, serif; background: #fff; color: #111; padding: 36px; width: 1100px; }
+    h1 { text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 24px; }
+    .arch { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+    .layer { width: 920px; border: 2px solid #111; padding: 16px; background: #fafafa; }
+    .layer-title { font-weight: bold; font-size: 15px; margin-bottom: 12px; text-align: center; }
+    .boxes { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .box { border: 2px solid #111; padding: 12px 16px; min-width: 150px; text-align: center; font-size: 14px; background: #fff; }
+    .client { background: #e8f4ea; }
+    .app { background: #eef6ff; }
+    .db { background: #fff8e6; }
+    .ext { background: #f7ecff; }
+    .arrow { font-size: 22px; line-height: 1; }
+    .caption { margin-top: 16px; text-align: center; font-size: 13px; color: #444; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.4: Proposed System Architecture</h1>
+  <div class="arch">
+    <div class="layer">
+      <div class="layer-title">Presentation Layer</div>
+      <div class="boxes">
+        <div class="box client">Passenger Web Browser</div>
+        <div class="box client">Admin Web Browser</div>
+        <div class="box client">Mobile Browser</div>
+      </div>
+    </div>
+    <div class="arrow">&#8595;&#8593;</div>
+    <div class="layer">
+      <div class="layer-title">Application Layer (Next.js 16 + TypeScript)</div>
+      <div class="boxes">
+        <div class="box app">Route Search</div>
+        <div class="box app">Seat Booking</div>
+        <div class="box app">Checkout &amp; Payment API</div>
+        <div class="box app">E-Ticket / QR Service</div>
+        <div class="box app">Admin Dashboard</div>
+        <div class="box app">Reports &amp; Insights</div>
+      </div>
+    </div>
+    <div class="arrow">&#8595;&#8593;</div>
+    <div class="layer">
+      <div class="layer-title">Data Layer (Supabase / PostgreSQL)</div>
+      <div class="boxes">
+        <div class="box db">Auth &amp; Profiles</div>
+        <div class="box db">Routes &amp; Schedules</div>
+        <div class="box db">Seats &amp; Bookings</div>
+        <div class="box db">Tickets &amp; Payments</div>
+        <div class="box db">Row Level Security</div>
+      </div>
+    </div>
+    <div class="arrow">&#8595;&#8593;</div>
+    <div class="layer">
+      <div class="layer-title">External Services</div>
+      <div class="boxes">
+        <div class="box ext">Paystack</div>
+        <div class="box ext">Resend Email</div>
+        <div class="box ext">Google Maps</div>
+        <div class="box ext">SMS Gateway</div>
+        <div class="box ext">Vercel Hosting</div>
+      </div>
+    </div>
+  </div>
+  <p class="caption">Three-tier web architecture for the Yobe State E-Transport Booking and Management System</p>
+</body>
+</html>

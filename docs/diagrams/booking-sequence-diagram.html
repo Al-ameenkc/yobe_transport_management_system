@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.10 - Booking Sequence Diagram</title>
+  <style>
+    body { font-family: "Times New Roman", Times, serif; background:#fff; color:#111; padding:24px; width:1200px; margin:0; }
+    h1 { text-align:center; font-size:18px; margin-bottom:14px; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.10: Sequence Diagram for Online Booking Process</h1>
+  <svg width="1140" height="620" xmlns="http://www.w3.org/2000/svg" font-family="Times New Roman" font-size="12">
+    <!-- Lifelines -->
+    <text x="80" y="30" text-anchor="middle" font-weight="bold">Passenger</text>
+    <line x1="80" y1="45" x2="80" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+    <text x="260" y="30" text-anchor="middle" font-weight="bold">Web UI</text>
+    <line x1="260" y1="45" x2="260" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+    <text x="460" y="30" text-anchor="middle" font-weight="bold">Next.js Server</text>
+    <line x1="460" y1="45" x2="460" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+    <text x="680" y="30" text-anchor="middle" font-weight="bold">Supabase DB</text>
+    <line x1="680" y1="45" x2="680" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+    <text x="900" y="30" text-anchor="middle" font-weight="bold">Paystack</text>
+    <line x1="900" y1="45" x2="900" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+    <text x="1060" y="30" text-anchor="middle" font-weight="bold">Email/SMS</text>
+    <line x1="1060" y1="45" x2="1060" y2="580" stroke="#111" stroke-dasharray="5,4"/>
+
+    <!-- Messages -->
+    <line x1="80" y1="70" x2="260" y2="70" stroke="#111" marker-end="url(#arr)"/><text x="170" y="63">search trip</text>
+    <line x1="260" y1="95" x2="460" y2="95" stroke="#111" marker-end="url(#arr)"/><text x="360" y="88">fetch schedules</text>
+    <line x1="460" y1="120" x2="680" y2="120" stroke="#111" marker-end="url(#arr)"/><text x="570" y="113">query routes/seats</text>
+    <line x1="680" y1="145" x2="80" y2="145" stroke="#111" stroke-dasharray="4,3" marker-end="url(#arr)"/><text x="380" y="138">display available trips</text>
+
+    <line x1="80" y1="180" x2="260" y2="180" stroke="#111" marker-end="url(#arr)"/><text x="170" y="173">select seats</text>
+    <line x1="260" y1="205" x2="460" y2="205" stroke="#111" marker-end="url(#arr)"/><text x="360" y="198">hold_seats()</text>
+    <line x1="460" y1="230" x2="680" y2="230" stroke="#111" marker-end="url(#arr)"/><text x="570" y="223">update seat status=held</text>
+
+    <line x1="80" y1="265" x2="260" y2="265" stroke="#111" marker-end="url(#arr)"/><text x="170" y="258">checkout</text>
+    <line x1="260" y1="290" x2="900" y2="290" stroke="#111" marker-end="url(#arr)"/><text x="580" y="283">initialize payment</text>
+    <line x1="900" y1="315" x2="80" y2="315" stroke="#111" stroke-dasharray="4,3" marker-end="url(#arr)"/><text x="490" y="308">payment success callback</text>
+
+    <line x1="260" y1="350" x2="460" y2="350" stroke="#111" marker-end="url(#arr)"/><text x="360" y="343">confirm_booking()</text>
+    <line x1="460" y1="375" x2="680" y2="375" stroke="#111" marker-end="url(#arr)"/><text x="570" y="368">create booking, ticket, payment</text>
+    <line x1="460" y1="400" x2="680" y2="400" stroke="#111" marker-end="url(#arr)"/><text x="570" y="393">mark seats booked</text>
+
+    <line x1="460" y1="435" x2="1060" y2="435" stroke="#111" marker-end="url(#arr)"/><text x="760" y="428">send ticket notification</text>
+    <line x1="680" y1="470" x2="80" y2="470" stroke="#111" stroke-dasharray="4,3" marker-end="url(#arr)"/><text x="380" y="463">return e-ticket + QR code</text>
+
+    <defs>
+      <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#111"/>
+      </marker>
+    </defs>
+  </svg>
+  <p class="caption">Sequence model of interactions during seat selection, payment, booking confirmation, and notification</p>
+</body>
+</html>

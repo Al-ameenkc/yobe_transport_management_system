@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figure 3.1 - Existing Manual Booking Workflow</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: #fff;
+      color: #111;
+      padding: 40px;
+      width: 1100px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 28px;
+    }
+    .flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .box {
+      width: 520px;
+      border: 2px solid #111;
+      padding: 14px 18px;
+      text-align: center;
+      font-size: 15px;
+      background: #fafafa;
+      line-height: 1.4;
+    }
+    .box.start, .box.end {
+      border-radius: 50%;
+      width: 220px;
+      padding: 18px;
+      background: #e8f4ea;
+    }
+    .box.decision {
+      width: 300px;
+      padding: 22px 12px;
+      transform: rotate(0deg);
+      background: #fff8e6;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .arrow {
+      width: 2px;
+      height: 28px;
+      background: #111;
+      position: relative;
+    }
+    .arrow::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 10px solid #111;
+    }
+    .label {
+      font-size: 13px;
+      font-style: italic;
+      color: #333;
+      margin: 4px 0 2px;
+    }
+    .side-note {
+      margin-top: 24px;
+      font-size: 13px;
+      text-align: center;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Figure 3.1: Existing Manual Transport Booking Workflow</h1>
+  <div class="flow">
+    <div class="box start">Passenger arrives at motor park</div>
+    <div class="arrow"></div>
+    <div class="box">Passenger enquires about trip availability at booking counter</div>
+    <div class="arrow"></div>
+    <div class="box">Booking clerk checks paper manifest or verbal seat records</div>
+    <div class="arrow"></div>
+    <div class="box decision">Seat available?</div>
+    <div class="label">No — passenger waits or tries another operator</div>
+    <div class="arrow"></div>
+    <div class="box">Passenger pays fare in cash</div>
+    <div class="arrow"></div>
+    <div class="box">Clerk writes paper ticket and records name in manifest book</div>
+    <div class="arrow"></div>
+    <div class="box">Passenger waits at terminal until departure time</div>
+    <div class="arrow"></div>
+    <div class="box">Attendant verifies paper ticket at boarding point</div>
+    <div class="arrow"></div>
+    <div class="box">Driver departs; manager reconciles cash records manually</div>
+    <div class="arrow"></div>
+    <div class="box end">Trip completed</div>
+  </div>
+  <p class="side-note">Source: Field observation and analysis of manual transport operations in Yobe State motor parks</p>
+</body>
+</html>

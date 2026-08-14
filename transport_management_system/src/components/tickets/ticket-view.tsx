@@ -209,7 +209,7 @@ export function TicketView({ data }: { data: TicketViewData }) {
         </div>
 
         <p style={ticketStyles.footer}>
-          Present this QR code at the terminal for verification
+          YOBE LINE — present this QR code at the terminal for verification
         </p>
       </div>
 

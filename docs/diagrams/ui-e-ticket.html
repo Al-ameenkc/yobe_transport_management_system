@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-Ticket Interface</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#f8fafc; padding:30px; width:900px; margin:0 auto; }
+    .ticket { background:#fff; border:2px solid #a7f3d0; border-radius:12px; max-width:420px; margin:0 auto; overflow:hidden; }
+    .header { background:linear-gradient(to right,#059669,#047857); color:#fff; padding:16px 24px; }
+    .label { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#d1fae5; }
+    .route { font-size:22px; font-weight:700; margin-top:4px; }
+    .body { padding:24px; }
+    .row { display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; }
+    .qr { width:140px; height:140px; border:1px solid #e2e8f0; margin:16px auto; display:flex; align-items:center; justify-content:center; background:#f8fafc; font-size:12px; color:#64748b; }
+    .code { text-align:center; font-family:monospace; font-size:16px; font-weight:700; color:#047857; }
+    .btns { display:flex; gap:10px; justify-content:center; margin-top:16px; }
+    .btn { border:1px solid #cbd5e1; background:#fff; padding:8px 14px; border-radius:8px; font-size:13px; }
+    .caption { text-align:center; font-family:"Times New Roman", serif; margin-top:16px; font-size:13px; color:#444; }
+  </style>
+</head>
+<body>
+  <div class="ticket">
+    <div class="header">
+      <div class="label">E-Ticket</div>
+      <div class="route">Yobe → Abuja</div>
+    </div>
+    <div class="body">
+      <div class="row"><span>Company</span><strong>Yobe Line Transport</strong></div>
+      <div class="row"><span>Departure</span><strong>15 Jul 2026, 06:00</strong></div>
+      <div class="row"><span>Bus</span><strong>YBE-101-AA</strong></div>
+      <div class="row"><span>Seats</span><strong>2B, 2C</strong></div>
+      <div class="row"><span>Amount</span><strong>₦28,000</strong></div>
+      <div class="qr">QR CODE</div>
+      <div class="code">TMS-A8F29C71B4E2</div>
+      <div class="btns"><button class="btn">Download PDF</button><button class="btn">Download Image</button></div>
+    </div>
+  </div>
+  <p class="caption">Figure 4.5: E-Ticket Module Interface</p>
+</body>
+</html>

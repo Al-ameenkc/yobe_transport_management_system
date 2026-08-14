@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout Interface</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#f8fafc; padding:30px; width:900px; margin:0 auto; }
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:12px; max-width:520px; margin:0 auto; padding:24px; }
+    h1 { font-size:22px; margin-bottom:16px; }
+    .muted { color:#64748b; font-size:14px; }
+    .price { font-size:30px; color:#047857; font-weight:700; margin:12px 0 16px; }
+    .paybox { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; margin-bottom:16px; font-size:14px; color:#334155; }
+    .paybox strong { display:block; margin-bottom:4px; color:#0f172a; }
+    .chips { display:flex; gap:8px; margin-top:10px; }
+    .chip { border:1px solid #e2e8f0; background:#fff; border-radius:999px; padding:4px 10px; font-size:12px; }
+    label { display:block; font-size:14px; margin-bottom:6px; font-weight:600; }
+    input { width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; margin-bottom:8px; font-size:14px; box-sizing:border-box; }
+    .hint { font-size:12px; color:#64748b; margin:0 0 16px; }
+    .btn { width:100%; background:#047857; color:#fff; border:none; border-radius:8px; padding:12px; font-size:15px; font-weight:600; }
+    .secure { text-align:center; font-size:12px; color:#64748b; margin-top:12px; }
+    .caption { text-align:center; font-family:"Times New Roman", serif; margin-top:16px; font-size:13px; color:#444; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Complete Booking</h1>
+    <p class="muted">Seats selected: <strong>2</strong></p>
+    <div class="price">₦28,000</div>
+    <div class="paybox">
+      <strong>Pay with Paystack</strong>
+      You will be redirected to Paystack to complete payment. Your e-ticket is issued only after the payment succeeds.
+      <div class="chips">
+        <span class="chip">Card</span>
+        <span class="chip">Bank</span>
+        <span class="chip">USSD</span>
+      </div>
+    </div>
+    <label for="phone">Mobile number</label>
+    <input id="phone" value="08031234567" />
+    <p class="hint">We will use this number to contact you if you do not show up for your trip.</p>
+    <button class="btn">Pay ₦28,000 with Paystack</button>
+    <p class="secure">Payments are secured by Paystack</p>
+  </div>
+  <p class="caption">Figure 4.4: Checkout Module Interface</p>
+</body>
+</html>

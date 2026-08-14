@@ -28,7 +28,7 @@ export function Navbar({ user }: NavbarProps) {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-bold text-emerald-700">
           <Bus className="h-6 w-6" />
-          <span>TMS Nigeria</span>
+          <span>YOBE LINE</span>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">

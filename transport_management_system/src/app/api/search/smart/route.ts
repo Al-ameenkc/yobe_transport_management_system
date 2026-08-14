@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { parseSmartSearch } from "@/lib/ai";
-import { YOBE_ORIGIN, todayDateString } from "@/lib/constants/routes";
+import { todayDateString } from "@/lib/constants/routes";
 
 export async function POST(request: Request) {
   const { query } = await request.json();
@@ -14,8 +14,9 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({
-    origin: YOBE_ORIGIN,
+    origin: parsed.origin || "Damaturu",
     destination: parsed.destination,
     date: parsed.date || todayDateString(),
+    scope: parsed.scope || "outside",
   });
 }

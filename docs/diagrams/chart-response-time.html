@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chart 4.2 - Booking Performance</title>
+  <style>
+    body { font-family: "Times New Roman", serif; background:#fff; padding:30px; width:900px; margin:0 auto; }
+    h1 { text-align:center; font-size:18px; margin-bottom:24px; }
+    .bars { display:flex; align-items:flex-end; justify-content:space-around; height:300px; border-left:2px solid #111; border-bottom:2px solid #111; padding:0 20px 0 50px; }
+    .bar-wrap { display:flex; flex-direction:column; align-items:center; width:100px; }
+    .bar { width:55px; background:#2563eb; border:1px solid #1d4ed8; }
+    .label { margin-top:8px; font-size:11px; text-align:center; }
+    .val { font-size:12px; font-weight:bold; margin-bottom:4px; }
+    .y { position:absolute; left:20px; font-size:12px; }
+    .caption { text-align:center; font-size:13px; color:#444; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <h1>Chart 4.2: Average Page Response Time (seconds)</h1>
+  <div class="bars">
+    <div class="bar-wrap"><div class="val">1.2s</div><div class="bar" style="height:120px"></div><div class="label">Home Page</div></div>
+    <div class="bar-wrap"><div class="val">1.8s</div><div class="bar" style="height:180px"></div><div class="label">Search Results</div></div>
+    <div class="bar-wrap"><div class="val">2.1s</div><div class="bar" style="height:210px"></div><div class="label">Seat Map</div></div>
+    <div class="bar-wrap"><div class="val">2.4s</div><div class="bar" style="height:240px"></div><div class="label">Checkout</div></div>
+    <div class="bar-wrap"><div class="val">1.6s</div><div class="bar" style="height:160px"></div><div class="label">E-Ticket</div></div>
+    <div class="bar-wrap"><div class="val">1.9s</div><div class="bar" style="height:190px"></div><div class="label">Admin Dashboard</div></div>
+  </div>
+  <p class="caption">Average response time recorded during local implementation and simulation tests</p>
+</body>
+</html>

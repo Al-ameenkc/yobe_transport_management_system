@@ -6,7 +6,7 @@ import {
   getYobeLGAsList,
   getScheduleFare,
 } from "@/lib/booking/queries";
-import { YOBE_ORIGIN, todayDateString, type TripScope } from "@/lib/constants/routes";
+import { todayDateString, displayBoardingTown, type TripScope } from "@/lib/constants/routes";
 
 interface SearchPageProps {
   searchParams: Promise<{
@@ -44,9 +44,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       heading = "All within-Yobe buses";
     }
   } else if (params.destination) {
-    heading = `Buses from ${YOBE_ORIGIN} to ${params.destination}`;
+    heading = `Buses from ${params.origin || "Yobe"} to ${params.destination}`;
+  } else if (params.origin) {
+    heading = `Buses leaving ${params.origin}`;
   } else {
-    heading = `All buses leaving ${YOBE_ORIGIN}`;
+    heading = `All buses leaving Yobe`;
   }
 
   const dateLabel = new Date(`${date}T12:00:00`).toLocaleDateString("en-NG", {
@@ -96,6 +98,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 schedule={schedule}
                 seats={schedule.seats ?? []}
                 fare={getScheduleFare(schedule)}
+                boardingOrigin={displayBoardingTown(schedule.route.origin, params.origin)}
               />
             ))}
           </div>

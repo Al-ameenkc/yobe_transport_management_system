@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { getYobeLGAs } from "@/lib/constants/lgas";
-import { YOBE_ORIGIN, todayDateString, type TripScope } from "@/lib/constants/routes";
+import { todayDateString, type TripScope } from "@/lib/constants/routes";
 import { VEHICLE_CONFIGS, VEHICLE_TYPES } from "@/lib/constants/vehicles";
 
 interface SearchFormProps {
@@ -49,13 +49,13 @@ export function SearchForm({
     const date = (form.get("date") as string) || today;
     const vehicleType = form.get("vehicleType") as string;
     const tripScope = form.get("scope") as TripScope;
+    const origin = form.get("origin") as string;
 
     const params = new URLSearchParams({ date, scope: tripScope });
+    if (origin) params.set("origin", origin);
 
     if (tripScope === "within") {
-      const origin = form.get("lgaOrigin") as string;
       const destination = form.get("lgaDestination") as string;
-      if (origin) params.set("origin", origin);
       if (destination) params.set("destination", destination);
     } else {
       const destination = form.get("destination") as string;
@@ -90,68 +90,59 @@ export function SearchForm({
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <Label htmlFor="origin">From (town / LGA)</Label>
+              <Select
+                id="origin"
+                name="origin"
+                defaultValue={defaultOrigin || "Damaturu"}
+                className="mt-1"
+                disabled={isPending}
+              >
+                {lgas.map((lga) => (
+                  <option key={lga} value={lga}>
+                    {lga}
+                  </option>
+                ))}
+              </Select>
+            </div>
+
             {scope === "within" ? (
-              <>
-                <div>
-                  <Label htmlFor="lgaOrigin">From (LGA)</Label>
-                  <Select
-                    id="lgaOrigin"
-                    name="lgaOrigin"
-                    defaultValue={defaultOrigin || "Damaturu"}
-                    className="mt-1"
-                    disabled={isPending}
-                  >
-                    {lgas.map((lga) => (
-                      <option key={lga} value={lga}>
-                        {lga}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-                <div>
-                  <Label htmlFor="lgaDestination">To (LGA)</Label>
-                  <Select
-                    id="lgaDestination"
-                    name="lgaDestination"
-                    defaultValue={defaultDestination}
-                    className="mt-1"
-                    disabled={isPending}
-                  >
-                    {showAllOption && <option value="">All LGAs</option>}
-                    {lgas.map((lga) => (
-                      <option key={lga} value={lga}>
-                        {lga}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-              </>
+              <div>
+                <Label htmlFor="lgaDestination">To (LGA)</Label>
+                <Select
+                  id="lgaDestination"
+                  name="lgaDestination"
+                  defaultValue={defaultDestination}
+                  className="mt-1"
+                  disabled={isPending}
+                >
+                  {showAllOption && <option value="">All LGAs</option>}
+                  {lgas.map((lga) => (
+                    <option key={lga} value={lga}>
+                      {lga}
+                    </option>
+                  ))}
+                </Select>
+              </div>
             ) : (
-              <>
-                <div>
-                  <Label>From</Label>
-                  <div className="mt-1 flex h-10 items-center rounded-md border border-slate-200 bg-slate-50 px-3 text-sm font-medium text-slate-700">
-                    {YOBE_ORIGIN}
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="destination">To (State)</Label>
-                  <Select
-                    id="destination"
-                    name="destination"
-                    defaultValue={defaultDestination}
-                    className="mt-1"
-                    disabled={isPending}
-                  >
-                    {showAllOption && <option value="">All states</option>}
-                    {destinations.map((d) => (
-                      <option key={d} value={d}>
-                        {d}
-                      </option>
-                    ))}
-                  </Select>
-                </div>
-              </>
+              <div>
+                <Label htmlFor="destination">To (State)</Label>
+                <Select
+                  id="destination"
+                  name="destination"
+                  defaultValue={defaultDestination}
+                  className="mt-1"
+                  disabled={isPending}
+                >
+                  {showAllOption && <option value="">All states</option>}
+                  {destinations.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </Select>
+              </div>
             )}
 
             <div>
@@ -198,7 +189,7 @@ export function SearchForm({
             >
               {scope === "within"
                 ? "Show all within-Yobe buses today"
-                : "Show all buses leaving Yobe today"}
+                : "Show all interstate buses today"}
             </Button>
           </div>
         </form>

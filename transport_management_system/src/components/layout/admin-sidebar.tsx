@@ -41,7 +41,7 @@ export function AdminSidebar() {
     <aside className="w-64 shrink-0 border-r border-slate-200 bg-slate-50 p-4">
       <div className="mb-6">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-          Admin Panel
+          YOBE LINE Admin
         </p>
       </div>
       <nav className="space-y-1">
