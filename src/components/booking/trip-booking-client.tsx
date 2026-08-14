@@ -56,13 +56,13 @@ export function TripBookingClient({
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-3">
-      <div className="lg:col-span-2">
+    <div className="mt-6 grid gap-6 lg:grid-cols-3 lg:gap-8">
+      <div className="min-w-0 lg:col-span-2">
         <Card>
           <CardHeader>
             <CardTitle>Select Your Seats</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="overflow-x-auto px-3 sm:px-6">
             <SeatMap
               scheduleId={schedule.id}
               seats={seats}
@@ -75,8 +75,8 @@ export function TripBookingClient({
         </Card>
       </div>
 
-      <div>
-        <Card className="sticky top-24">
+      <div className="min-w-0">
+        <Card className="lg:sticky lg:top-24">
           <CardHeader>
             <CardTitle className="text-lg">Trip Summary</CardTitle>
           </CardHeader>
@@ -85,7 +85,7 @@ export function TripBookingClient({
               <span className="text-slate-500">Operator:</span>{" "}
               {schedule.route.company.name}
             </p>
-            <p>
+            <p className="break-words">
               <span className="text-slate-500">Route:</span>{" "}
               {schedule.route.origin} → {schedule.route.destination}
             </p>

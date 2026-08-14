@@ -86,8 +86,11 @@ export function BusScheduleCard({ schedule, seats, fare, boardingOrigin }: BusSc
               </span>
             </div>
 
-            <Link href={`/trips/${schedule.id}${boardingOrigin ? `?from=${encodeURIComponent(boardingOrigin)}` : ""}`}>
-              <Button size="sm" disabled={availableSeats === 0}>
+            <Link
+              href={`/trips/${schedule.id}${boardingOrigin ? `?from=${encodeURIComponent(boardingOrigin)}` : ""}`}
+              className="block"
+            >
+              <Button size="sm" className="w-full sm:w-auto" disabled={availableSeats === 0}>
                 {availableSeats === 0 ? "Fully Booked" : "Select Seats & Book"}
               </Button>
             </Link>

@@ -58,7 +58,7 @@ export default async function TicketPage({ params }: TicketPageProps) {
     .filter((s: string | undefined): s is string => Boolean(s));
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-8">
+    <div className="mx-auto max-w-lg px-3 py-6 sm:px-4 sm:py-8">
       <TicketView
         data={{
           ticketCode: ticket.ticket_code,

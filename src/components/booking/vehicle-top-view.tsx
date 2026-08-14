@@ -71,7 +71,7 @@ export function VehicleTopView({
   return (
     <div className="space-y-2">
       <div
-        className="relative mx-auto w-full rounded-xl border border-slate-200 bg-white"
+        className="relative mx-auto w-full max-w-full rounded-xl border border-slate-200 bg-white"
         style={{ maxWidth: compact ? 280 : 320, height }}
       >
         <p

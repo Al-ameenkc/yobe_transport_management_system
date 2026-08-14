@@ -155,7 +155,7 @@ export function TripRouteBanner({
         )}
         {fare != null && (
           <span
-            className={`ml-auto rounded-full bg-white font-bold text-emerald-800 ${
+            className={`rounded-full bg-white font-bold text-emerald-800 sm:ml-auto ${
               isCard ? "px-3 py-1 text-xs" : "px-4 py-1.5 text-sm sm:text-base"
             }`}
           >
@@ -168,9 +168,9 @@ export function TripRouteBanner({
   const info = (
     <div
       className={`min-w-0 ${
-        isCard
-          ? "flex h-full flex-col justify-center p-5 sm:p-6"
-          : "flex flex-col p-6 sm:p-8"
+          isCard
+          ? "flex h-full min-w-0 flex-col justify-center p-4 sm:p-6"
+          : "flex min-w-0 flex-col p-4 sm:p-8"
       }`}
     >
       <div className="flex flex-wrap items-center gap-2">
@@ -193,15 +193,15 @@ export function TripRouteBanner({
 
       <div className={`flex flex-wrap items-center gap-2 sm:gap-3 ${isCard ? "mt-3" : "mt-4"}`}>
         <span
-          className={`font-bold ${isCard ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-4xl"}`}
+          className={`min-w-0 break-words font-bold ${isCard ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl lg:text-4xl"}`}
         >
           {origin}
         </span>
         <ArrowRight
-          className={`shrink-0 text-emerald-200 ${isCard ? "h-5 w-5" : "h-7 w-7 sm:h-8 sm:w-8"}`}
+          className={`shrink-0 text-emerald-200 ${isCard ? "h-5 w-5" : "h-6 w-6 sm:h-8 sm:w-8"}`}
         />
         <span
-          className={`font-bold ${isCard ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl lg:text-4xl"}`}
+          className={`min-w-0 break-words font-bold ${isCard ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl lg:text-4xl"}`}
         >
           {destination}
         </span>

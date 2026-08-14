@@ -12,18 +12,18 @@ export async function TodaySchedules() {
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
             Today&apos;s Buses
           </h2>
-          <p className="mt-1 text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 sm:text-base">
             {todaySchedules.length} bus{todaySchedules.length !== 1 ? "es" : ""} available — seat
             maps shown below
           </p>
         </div>
-        <Link href="/search">
-          <Button variant="outline">View All</Button>
+        <Link href="/search" className="shrink-0">
+          <Button variant="outline" className="w-full sm:w-auto">View All</Button>
         </Link>
       </div>
 

@@ -44,7 +44,7 @@ export default async function TripPage({ params, searchParams }: TripPageProps) 
     (isYobeLGA(origin) && isYobeLGA(schedule.route.destination));
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-6xl px-3 py-6 sm:px-6 sm:py-8">
       <Link href="/search" className="text-sm text-emerald-600 hover:underline">
         ← Back to search
       </Link>

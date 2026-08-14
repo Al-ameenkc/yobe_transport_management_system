@@ -213,10 +213,11 @@ export function TicketView({ data }: { data: TicketViewData }) {
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
         <Button
           type="button"
           variant="outline"
+          className="w-full sm:w-auto"
           onClick={downloadImage}
           loading={loading === "image"}
           disabled={loading !== null && loading !== "image"}
@@ -227,6 +228,7 @@ export function TicketView({ data }: { data: TicketViewData }) {
         <Button
           type="button"
           variant="outline"
+          className="w-full sm:w-auto"
           onClick={downloadPdf}
           loading={loading === "pdf"}
           disabled={loading !== null && loading !== "pdf"}

@@ -24,8 +24,8 @@ export default async function BookingsPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-      <h1 className="text-2xl font-bold">My Bookings</h1>
+    <div className="mx-auto max-w-3xl px-3 py-6 sm:px-6 sm:py-8">
+      <h1 className="text-xl font-bold sm:text-2xl">My Bookings</h1>
       <BookingsList bookings={(data ?? []) as Parameters<typeof BookingsList>[0]["bookings"]} />
     </div>
   );

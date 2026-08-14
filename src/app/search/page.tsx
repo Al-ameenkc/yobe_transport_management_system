@@ -59,9 +59,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   });
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <h1 className="text-2xl font-bold">Available Buses</h1>
-      <p className="mt-1 text-slate-500">
+    <div className="mx-auto max-w-7xl px-3 py-6 sm:px-6 sm:py-8">
+      <h1 className="text-xl font-bold sm:text-2xl">Available Buses</h1>
+      <p className="mt-1 text-sm text-slate-500 sm:text-base">
         {scope === "within" ? "Within Yobe State (LGA to LGA)" : "Outside Yobe (inter-state)"} —{" "}
         {dateLabel}
       </p>
@@ -79,7 +79,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-base font-semibold leading-snug sm:text-lg">
           {heading} · {schedules.length} bus{schedules.length !== 1 ? "es" : ""}
         </h2>
 

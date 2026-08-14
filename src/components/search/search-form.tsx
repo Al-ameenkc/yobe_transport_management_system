@@ -71,8 +71,8 @@ export function SearchForm({
   }
 
   return (
-    <Card className="mx-auto max-w-4xl text-left text-slate-900">
-      <CardContent className="pt-6">
+    <Card className="mx-auto w-full max-w-4xl text-left text-slate-900">
+      <CardContent className="px-4 pt-5 sm:px-6 sm:pt-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="scope">Trip Type</Label>
@@ -176,14 +176,15 @@ export function SearchForm({
             </div>
           </div>
 
-          <div className="flex flex-wrap items-end gap-3">
-            <Button type="submit" loading={isPending}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
+            <Button type="submit" className="w-full sm:w-auto" loading={isPending}>
               {scope === "within" ? "Find Local Buses" : "Find Buses"}
             </Button>
             <Button
               type="button"
               variant="ghost"
               size="sm"
+              className="w-full sm:w-auto"
               onClick={showAllToday}
               loading={isPending}
             >

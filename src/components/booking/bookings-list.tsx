@@ -61,9 +61,9 @@ export function BookingsList({ bookings }: { bookings: BookingRow[] }) {
 
         return (
           <Card key={booking.id}>
-            <CardContent className="flex flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="font-semibold">
+            <CardContent className="flex min-w-0 flex-col gap-4 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="break-words font-semibold">
                   {booking.schedule.route.origin} → {booking.schedule.route.destination}
                 </p>
                 <p className="text-sm text-slate-500">
@@ -89,17 +89,18 @@ export function BookingsList({ bookings }: { bookings: BookingRow[] }) {
                   {booking.status}
                 </Badge>
               </div>
-              <div className="flex gap-2">
+              <div className="flex w-full gap-2 sm:w-auto">
                 {booking.status === "confirmed" && (
                   <>
-                    <Link href={`/tickets/${booking.id}`}>
-                      <Button variant="outline" size="sm">
+                    <Link href={`/tickets/${booking.id}`} className="flex-1 sm:flex-none">
+                      <Button variant="outline" size="sm" className="w-full">
                         View Ticket
                       </Button>
                     </Link>
                     <Button
                       variant="destructive"
                       size="sm"
+                      className="flex-1 sm:flex-none"
                       onClick={() => handleCancel(booking.id)}
                       disabled={cancelling === booking.id}
                     >
